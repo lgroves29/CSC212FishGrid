@@ -19,7 +19,7 @@ public class Snail extends WorldObject {
 	/**
 	 * This is the color of the snail shell.
 	 */
-	public Color shellColor = Color.white;
+	public Color shellColor = Color.blue;
 	/**
 	 * This is pupil of the snail color.
 	 */

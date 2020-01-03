@@ -157,6 +157,12 @@ public class World {
 		return r;
 	}
 	
+	public FallingRock insertFallingRockRandomly() {
+		FallingRock fr = new FallingRock(this);
+		insertRandomly(fr);
+		return fr;
+	}
+	
 	/**
 	 * Insert a new Fish into the world at random of a specific color.
 	 * @param color - the color of the fish.
@@ -206,9 +212,12 @@ public class World {
 		for (WorldObject it : inSpot) {
 			// TODO(FishGrid): Don't let us move over rocks as a Fish.
 			// The other fish shouldn't step "on" the player, the player should step on the other fish.
-			if (it instanceof Snail) {
+			if (it instanceof Snail || it instanceof Rock || it instanceof FallingRock) {
 				// This if-statement doesn't let anyone step on the Snail.
 				// The Snail(s) are not gonna take it.
+				return false;
+			}
+			if (it instanceof Fish && isPlayer == false) {
 				return false;
 			}
 		}
@@ -235,12 +244,17 @@ public class World {
 	public static void objectsFollow(WorldObject target, List<? extends WorldObject> followers) {
 		// TODO(FishGrid) Comment this method!
 		// What is recentPositions?
+		//recentPositions is a constantly updated list of the recent positions of the player
 		// What is followers?
+		//followers is a list passed into this function that gives the group that is following the player (ie. the found list)
 		// What is target?
+		//target is the object passed in that will get followed ie. the player
 		// Why is past = putWhere[i+1]? Why not putWhere[i]?
+		//because putWhere[i] is the location of the player, the most recent thing added to recentPositions
 		List<IntPoint> putWhere = new ArrayList<>(target.recentPositions);
 		for (int i=0; i < followers.size() && i+1 < putWhere.size(); i++) {
 			// What is the deal with the two conditions in this for-loop?
+			//you want to iterate through the followers, but if you have more followers than recent positions, the code won't compile in the next line, better just leave the fish where it is
 			IntPoint past = putWhere.get(i+1);
 			followers.get(i).setPosition(past.x, past.y);
 		}

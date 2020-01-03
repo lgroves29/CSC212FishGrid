@@ -16,13 +16,9 @@ import me.jjfoley.gfx.TextBox;
  * @author jfoley
  */
 public class Main extends GFX {
-	/**
-	 * Game size (visual). TODO(lab) Try changing this to 600.
-	 */
-	public static int VISUAL_GRID_SIZE = 400;
-	/**
-	 * Game size (logical). TODO(lab) Try changing this to 15 or so.
-	 */
+	
+	public static int VISUAL_GRID_SIZE = 600;
+	
 	public static int LOGICAL_GRID_SIZE = 10;
 	/**
 	 * The words appear in the top part of the screen.
@@ -35,6 +31,8 @@ public class Main extends GFX {
 	/**
 	 * This is where the game logic lives.
 	 */
+	public static int rocks = 10;
+	
 	FishGame game;
 	/**
 	 * This TextBox wraps up making fonts and centering text.
